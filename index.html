@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Typing Speed Counter</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <style>
-        *{
+      * {
         padding: 0;
         margin: 0;
-        box-sizing: border-box; 
-        font-family: 'Roboto', sans-serif;       
-        }
-        .main{
+        box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
+      }
+      .main {
         width: 100%;
         height: 100vh;
         position: relative;
         background-color: #c7cccf;
-        
-        }
-        .centerDiv{
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         text-align: center;
-         transform: translate(-50%,-50%);
-        
-        
-        }
-        #btn{
+      }
+      .centerDiv {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+      }
+      #btn {
         padding: 14px;
         width: 120px;
         cursor: pointer;
@@ -40,17 +43,14 @@
         background-color: black;
         color: white;
         font-size: 18px;
-        
-        }
-        #words{
-          font-size: 16px;
-          font-family: 'Roboto', sans-serif;
-          font-weight: 400;
-          position: relative;
-        
-        
-        }
-        #icon{
+      }
+      #words {
+        font-size: 16px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        position: relative;
+      }
+      #icon {
         position: absolute;
         top: 10px;
         right: 5px;
@@ -59,96 +59,90 @@
         color: white;
         padding: 8px;
         border-radius: 100%;
-        
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="main">
-        <div class="centerDiv">
-            <h1>Typing Speed Test</h1><br>
-            <h2 class="result" id="msg">
-
-            </h2><br>
-            <textarea name="words" id="words" cols="120" rows="24" disabled placeholder="Type Here..."></textarea><br>
-            <i class="fa-solid fa-x" id="icon"></i>
-            <button id="btn" class="buttonMain">Start</button>
-        </div>
+      <div class="centerDiv">
+        <h1>Typing Speed Test</h1>
+        <br />
+        <h2 class="result" id="msg"></h2>
+        <br />
+        <textarea
+          name="words"
+          id="words"
+          cols="120"
+          rows="24"
+          disabled
+          placeholder="Type Here..."
+        ></textarea
+        ><br />
+        <i class="fa-solid fa-x" id="icon"></i>
+        <button id="btn" class="buttonMain">Start</button>
+      </div>
     </div>
 
     <script>
-        const setofWords=["Good Luck !"]
-        const msg=document.getElementById("msg")
-        const words = document.getElementById("words")
-        const btn = document.getElementById("btn")
-        let startTime,endTime
-     
-     let fun= document.getElementById("icon")
-    fun.addEventListener("click",function(){
-        if(btn.innerText==="Start"){
-            words.value=""
-        }else{
-          alert("Please click done first to clear textarea")
-        
+      const setofWords = ["Good Luck !"];
+      const msg = document.getElementById("msg");
+      const words = document.getElementById("words");
+      const btn = document.getElementById("btn");
+      let startTime, endTime;
+
+      let fun = document.getElementById("icon");
+      fun.addEventListener("click", function () {
+        if (btn.innerText === "Start") {
+          words.value = "";
+          msg.innerText=""
+        } else {
+          alert("Please click done first to clear textarea");
         }
-    
-    
-    })   
+      });
 
-    let warn = document.getElementById("words")
-    warn.addEventListener("click",function(){
-   
-        console.log(words)
-    
-    // }
-    
-    })
+      let warn = document.getElementById("words");
+      warn.addEventListener("click", function () {
+        console.log(words);
 
-     const play =()=>{
-         let randomNumber= Math.floor(Math.random()*setofWords.length)
-          msg.innerText= setofWords[randomNumber]
-          let date = new Date();
-          startTime = date.getTime();
-          btn.innerText="Done"
+        // }
+      });
 
-    }
-
-
-
-    const WordCounter=(data)=>{
-      let response= data.split(" ").length
-      console.log(response)
-      return response
-    
-    }
-    const endplay=()=>{
+      const play = () => {
+        let randomNumber = Math.floor(Math.random() * setofWords.length);
+        msg.innerText = setofWords[randomNumber];
         let date = new Date();
-          endTime = date.getTime();
-          let totalTime=((endTime-startTime)/1000)
-          console.log(totalTime)
-          let totalStr= words.value
-          let wordCount=WordCounter(totalStr)
-         let speed =  Math.round((wordCount/totalTime) * 60)
-         let finalMsg= `Your average typing speed is  ${speed} words per minute and you typed total ${wordCount} words in ${totalTime} seconds`
-         msg.innerText=finalMsg
-         btn.innerText="Start"
-       
-    }
+        startTime = date.getTime();
+        btn.innerText = "Done";
+      };
 
-      btn.addEventListener("click",function(){
-        if(this.innerText==="Start"){
-        
-            words.disabled=false
-        play();
-           
-        }else if(this.innerText=="Done"){
-            words.disabled=true
-            btn.innerText==="Start"
-            endplay()
+      const WordCounter = (data) => {
+        let response = data.split(" ").length;
+        console.log(response);
+        return response;
+      };
+      const endplay = () => {
+        let date = new Date();
+        endTime = date.getTime();
+        let totalTime = (endTime - startTime) / 1000;
+        console.log(totalTime);
+        let totalStr = words.value;
+        let wordCount = WordCounter(totalStr);
+        let speed = Math.round((wordCount / totalTime) * 60);
+        let finalMsg = `Your average typing speed is  ${speed} words per minute and you typed total ${wordCount} words in ${totalTime} seconds`;
+        msg.innerText = finalMsg;
+        btn.innerText = "Start";
+      };
+
+      btn.addEventListener("click", function () {
+        if (this.innerText === "Start") {
+          words.disabled = false;
+          play();
+        } else if (this.innerText == "Done") {
+          words.disabled = true;
+          btn.innerText === "Start";
+          endplay();
         }
-    
-    })
-
+      });
     </script>
-</body>
+  </body>
 </html>
