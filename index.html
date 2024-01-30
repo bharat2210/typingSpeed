@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box; 
+        font-family: 'Roboto', sans-serif;       
+        }
+        .main{
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        background-color: #3498db;
+        
+        }
+        .centerDiv{
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         text-align: center;
+         transform: translate(-50%,-50%);
+        
+        
+        }
+        #btn{
+        padding: 14px;
+        width: 100%;
+        border-radius: 6px;
+        background-color: black;
+        color: white;
+        
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="centerDiv">
+            <h1>Typing Speed Test</h1>
+            <h2 class="result" id="msg">
+
+            </h2><br>
+            <textarea name="words" id="words" cols="100" rows="10" disabled></textarea><br>
+            <button id="btn" class="buttonMain">Start</button>
+        </div>
+    </div>
+
+    <script>
+        const setofWords=["My name is Bharat","This is sample text",'hjj','hkjhkjhkj']
+        const msg=document.getElementById("msg")
+        const words = document.getElementById("words")
+        const btn = document.getElementById("btn")
+        let startTime,endTime
+        
+     const play =()=>{
+         let randomNumber= Math.floor(Math.random()*setofWords.length)
+          msg.innerText= setofWords[randomNumber]
+          let date = new Date();
+          startTime = date.getTime();
+          btn.innerText="Done"
+
+    }
+
+    const WordCounter=(data)=>{
+      let response= data.split(" ").length
+      console.log(response)
+      return response
+    
+    }
+    const endplay=()=>{
+        let date = new Date();
+          endTime = date.getTime();
+          let totalTime=((endTime-startTime)/1000)
+          console.log(totalTime)
+          let totalStr= words.value
+          let wordCount=WordCounter(totalStr)
+         let speed =  Math.round((wordCount/totalTime)*60)
+         let finalMsg= `You have typed total  ${speed} words per minute`
+         msg.innerText=finalMsg
+    }
+
+      btn.addEventListener("click",function(){
+        if(this.innerText==="Start"){
+        
+            words.disabled=false
+        play();
+           
+        }else if(this.innerText=="Done"){
+            words.disabled=true
+            btn.innerText==="Start"
+            endplay()
+        }
+    
+    })
+
+    </script>
+</body>
+</html>
