@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{
         padding: 0;
@@ -32,18 +33,32 @@
         
         }
         #btn{
-        padding: 24px;
+        padding: 14px;
+        width: 120px;
         cursor: pointer;
-        border-radius: 6px;
+        border-radius: 24px;
         background-color: black;
         color: white;
+        font-size: 18px;
         
         }
         #words{
           font-size: 16px;
           font-family: 'Roboto', sans-serif;
           font-weight: 400;
+          position: relative;
         
+        
+        }
+        #icon{
+        position: absolute;
+        top: 10px;
+        right: 5px;
+        font-size: 16px;
+        background-color: black;
+        color: white;
+        padding: 8px;
+        border-radius: 100%;
         
         }
     </style>
@@ -56,6 +71,7 @@
 
             </h2><br>
             <textarea name="words" id="words" cols="120" rows="24" disabled placeholder="Type Here..."></textarea><br>
+            <i class="fa-solid fa-x" id="icon"></i>
             <button id="btn" class="buttonMain">Start</button>
         </div>
     </div>
@@ -66,7 +82,28 @@
         const words = document.getElementById("words")
         const btn = document.getElementById("btn")
         let startTime,endTime
+     
+     let fun= document.getElementById("icon")
+    fun.addEventListener("click",function(){
+        if(btn.innerText==="Start"){
+            words.value=""
+        }else{
+          alert("Please click done first to clear textarea")
         
+        }
+    
+    
+    })   
+
+    let warn = document.getElementById("words")
+    warn.addEventListener("click",function(){
+   
+        console.log(words)
+    
+    // }
+    
+    })
+
      const play =()=>{
          let randomNumber= Math.floor(Math.random()*setofWords.length)
           msg.innerText= setofWords[randomNumber]
@@ -75,6 +112,8 @@
           btn.innerText="Done"
 
     }
+
+
 
     const WordCounter=(data)=>{
       let response= data.split(" ").length
@@ -93,7 +132,7 @@
          let finalMsg= `Your average typing speed is  ${speed} words per minute and you typed total ${wordCount} words in ${totalTime} seconds`
          msg.innerText=finalMsg
          btn.innerText="Start"
-         words.value=""
+       
     }
 
       btn.addEventListener("click",function(){
